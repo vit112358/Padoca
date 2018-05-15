@@ -5,21 +5,12 @@
  */
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdTerceiros;
 
-import br.ifmg.edu.trabalho_java_avancado.visao.CadastroMateria.*;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Fornecedor;
-import br.ifmg.edu.trabalho_java_avancado.modelo.Materia_Prima;
-import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutosTerceiros;
-import br.ifmg.edu.trabalho_java_avancado.modelo.Vendedor;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoTerceiros;
 import br.ifmg.edu.trabalho_java_avancado.service.FornecedorService;
-import br.ifmg.edu.trabalho_java_avancado.service.Materia_PrimaService;
 import br.ifmg.edu.trabalho_java_avancado.service.ProdutosTerceirosService;
-import br.ifmg.edu.trabalho_java_avancado.service.VendedorService;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
-import java.util.Date;
-import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -34,14 +25,16 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
      * Creates new form CadastroVendedorInclui
      */
     private ProdutosTerceirosService PTService;
-    private ProdutosTerceiros prodTerc;
+    private ProdutoTerceiros prodTerc;
 
-    public CadastroProdTercEdita(JDialog parent, boolean modal, ProdutosTerceirosService PTService, ProdutosTerceiros p) {
+    public CadastroProdTercEdita(JDialog parent, boolean modal, ProdutosTerceirosService PTService, ProdutoTerceiros p) {
         super(parent, modal);
         initComponents();
 
         this.PTService = PTService;
         this.prodTerc = p;
+        
+        carregaCombo();
 
         jTxtNome.setText(p.getNome());
         jTxtPrecoCusto.setText(String.valueOf(p.getPrecoCusto()));
@@ -70,6 +63,8 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
         jTxtEstoque = new javax.swing.JTextField();
         jTxtNome = new javax.swing.JTextField();
         jTxtEstoqueMin = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jCbxFornecedores = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jBtnSalva = new javax.swing.JButton();
         jBtnFechar = new javax.swing.JButton();
@@ -77,7 +72,7 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema de Padaria");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Vendedor"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Produto"));
 
         jLabel1.setText("Descrição:");
 
@@ -88,6 +83,10 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
         jLabel4.setText("Estoque:");
 
         jLabel5.setText("Estoque Mínimo:");
+
+        jLabel6.setText("Fornecedor:");
+
+        jCbxFornecedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,20 +99,21 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel6))
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTxtPrecoCusto, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(jTxtEstoque)
                     .addComponent(jTxtPrecoVenda)
                     .addComponent(jTxtNome)
-                    .addComponent(jTxtEstoqueMin))
+                    .addComponent(jTxtEstoqueMin)
+                    .addComponent(jCbxFornecedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -133,7 +133,11 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTxtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jCbxFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jBtnSalva.setText("Salvar");
@@ -155,7 +159,7 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(198, Short.MAX_VALUE)
                 .addComponent(jBtnSalva)
                 .addGap(30, 30, 30)
                 .addComponent(jBtnFechar)
@@ -185,14 +189,14 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(402, 339));
+        setSize(new java.awt.Dimension(402, 362));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -215,8 +219,8 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
         }
 
         int resp = JOptionPane.showConfirmDialog(this,
-                "Confirma a inclusão?",
-                "Incluir registro",
+                "Confirma a Edição?",
+                "Editar registro",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
 
@@ -237,7 +241,8 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
         prodTerc.setPrecoVenda(Float.parseFloat(jTxtPrecoVenda.getText()));
         prodTerc.setEstoque(Integer.parseInt(jTxtEstoque.getText()));
         prodTerc.setEstoqueMin(Integer.parseInt(jTxtEstoqueMin.getText()));
-
+        prodTerc.setFornecedor((Fornecedor)jCbxFornecedores.getSelectedItem());
+        
         try {
             PTService.salvar(prodTerc);
         } catch (NegocioException ex) {
@@ -253,11 +258,13 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnFechar;
     private javax.swing.JButton jBtnSalva;
+    private javax.swing.JComboBox<String> jCbxFornecedores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTxtEstoque;
@@ -266,5 +273,15 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
     private javax.swing.JTextField jTxtPrecoCusto;
     private javax.swing.JTextField jTxtPrecoVenda;
     // End of variables declaration//GEN-END:variables
+
+    private void carregaCombo() {
+        FornecedorService fService = new FornecedorService();
+        
+        Vector<Fornecedor> fornecedores = new Vector<>(fService.buscarTodos());
+        
+        DefaultComboBoxModel dcm = new DefaultComboBoxModel(fornecedores);
+        
+        jCbxFornecedores.setModel(dcm);
+    }
 
 }

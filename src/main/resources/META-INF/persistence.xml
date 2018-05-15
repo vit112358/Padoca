@@ -8,10 +8,12 @@
     <class>br.ifmg.edu.trabalho_java_avancado.modelo.Funcionario</class>
     <class>br.ifmg.edu.trabalho_java_avancado.modelo.Venda</class>
     <class>br.ifmg.edu.trabalho_java_avancado.modelo.Vendedor</class>
-    <class>br.ifmg.edu.trabalho_java_avancado.modelo.ProdutosProduzidos</class>
-    <class>br.ifmg.edu.trabalho_java_avancado.modelo.ProdutosTerceiros</class>
     <class>br.ifmg.edu.trabalho_java_avancado.modelo.Produto</class>
     <class>br.ifmg.edu.trabalho_java_avancado.modelo.VendaProduto</class>
+    <class>br.ifmg.edu.trabalho_java_avancado.modelo.ItemProducao</class>
+    <class>br.ifmg.edu.trabalho_java_avancado.modelo.Producao</class>
+    <class>br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido</class>
+    <class>br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoTerceiros</class>
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
       <property name="hibernate.show_sql" value="true"/>

@@ -5,6 +5,7 @@
  */
 package br.ifmg.edu.trabalho_java_avancado.modelo;
 
+import com.sun.istack.internal.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -29,10 +30,12 @@ public class VendaProduto implements Serializable {
     private Integer codigo;
     
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "codVenda")
     private Venda venda;
     
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "codProduto")
     private Produto produto;
     

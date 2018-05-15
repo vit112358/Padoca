@@ -23,6 +23,9 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        jTxtLogin.setText("vitor");
+        jTxtPwd.setText("123");
+        jRadioAdm.setSelected(true);
     }
 
     /**

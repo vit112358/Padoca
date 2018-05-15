@@ -17,11 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author Vitor
- */
-
 @Entity
 public class Venda implements Serializable {
     
@@ -33,8 +28,7 @@ public class Venda implements Serializable {
     @OneToMany(mappedBy = "venda",
                cascade = CascadeType.ALL,
                orphanRemoval = true)
-    private List<VendaProduto> itens 
-                      = new LinkedList<VendaProduto>();
+    private List<VendaProduto> itens = new LinkedList<VendaProduto>();
     
     @ManyToOne
     @JoinColumn(name = "codVendedor")
@@ -62,8 +56,6 @@ public class Venda implements Serializable {
     public void setID(Integer ID) {
         this.ID = ID;
     }
-
-    
 
     public Date getDataVenda() {
         return DataVenda;

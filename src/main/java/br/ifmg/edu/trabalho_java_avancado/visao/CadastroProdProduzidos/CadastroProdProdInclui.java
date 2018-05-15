@@ -2,7 +2,7 @@ package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.Itens;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Materia_Prima;
-import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutosProduzidos;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
 import br.ifmg.edu.trabalho_java_avancado.service.ProdutosProduzidosService;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
 import java.util.LinkedList;
@@ -316,7 +316,7 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
             jTxtEstoque.setText(jTxtEstoque.getText().replace(",", "."));
         }
 
-        ProdutosProduzidos f = new ProdutosProduzidos();
+        ProdutoProduzido f = new ProdutoProduzido();
         f.setNome(jTxtNome.getText());
         f.setPrecoCusto(Float.parseFloat(jTxtPrecoCusto.getText()));
         f.setPrecoVenda(Float.parseFloat(jTxtPrecoVenda.getText()));

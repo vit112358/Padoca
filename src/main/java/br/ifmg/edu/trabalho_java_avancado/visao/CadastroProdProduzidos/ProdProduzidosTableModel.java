@@ -1,6 +1,6 @@
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos;
 
-import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutosProduzidos;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -10,14 +10,14 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ProdProduzidosTableModel extends AbstractTableModel{
 
-    private List<ProdutosProduzidos> prodProduzidos;
+    private List<ProdutoProduzido> prodProduzidos;
     private String[] cols = {"Código", "Nome", "Preço Custo", "Preço Venda", "Estoque", "Estoque Mín"};
 
-    public ProdProduzidosTableModel(List<ProdutosProduzidos> prodProduzidos) {
+    public ProdProduzidosTableModel(List<ProdutoProduzido> prodProduzidos) {
         this.prodProduzidos = prodProduzidos;
     }
     
-    public ProdProduzidosTableModel(List<ProdutosProduzidos> prodProduzidos, String[] cols) {
+    public ProdProduzidosTableModel(List<ProdutoProduzido> prodProduzidos, String[] cols) {
         this.prodProduzidos = prodProduzidos;
         this.cols = cols;
     }
@@ -61,7 +61,7 @@ public class ProdProduzidosTableModel extends AbstractTableModel{
         this.fireTableRowsUpdated(rowIndex, rowIndex);
     }
     
-    public void addRow(ProdutosProduzidos a){
+    public void addRow(ProdutoProduzido a){
         prodProduzidos.add(a);
         this.fireTableDataChanged();
     }

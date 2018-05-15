@@ -1,8 +1,12 @@
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdTerceiros;
 
-import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutosTerceiros;
+import br.ifmg.edu.trabalho_java_avancado.modelo.Fornecedor;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoTerceiros;
+import br.ifmg.edu.trabalho_java_avancado.service.FornecedorService;
 import br.ifmg.edu.trabalho_java_avancado.service.ProdutosTerceirosService;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -22,6 +26,7 @@ public class CadastroProdTercInclui extends javax.swing.JDialog {
         initComponents();
 
         this.PTService = pService;
+        carregaCombo();
     }
 
     /**
@@ -44,6 +49,8 @@ public class CadastroProdTercInclui extends javax.swing.JDialog {
         jTxtEstoque = new javax.swing.JTextField();
         jTxtPrecoVenda = new javax.swing.JTextField();
         jTxtEstoqueMin = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jCbxFornecedor = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jBtnSalva = new javax.swing.JButton();
         jBtnFechar = new javax.swing.JButton();
@@ -63,6 +70,10 @@ public class CadastroProdTercInclui extends javax.swing.JDialog {
 
         jLabel5.setText("Estoque Mínimo:");
 
+        jLabel6.setText("Fornecedor:");
+
+        jCbxFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -74,14 +85,16 @@ public class CadastroProdTercInclui extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTxtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                     .addComponent(jTxtPrecoCusto)
                     .addComponent(jTxtEstoqueMin)
                     .addComponent(jTxtPrecoVenda)
-                    .addComponent(jTxtEstoque))
+                    .addComponent(jTxtEstoque)
+                    .addComponent(jCbxFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -106,6 +119,10 @@ public class CadastroProdTercInclui extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTxtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jCbxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -159,13 +176,13 @@ public class CadastroProdTercInclui extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(399, 332));
+        setSize(new java.awt.Dimension(399, 373));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -199,17 +216,17 @@ public class CadastroProdTercInclui extends javax.swing.JDialog {
             jTxtPrecoCusto.setText(jTxtPrecoCusto.getText().replace(",", "."));
         }
 
-        if (jTxtEstoque.getText().contains(",")) {
-            jTxtEstoque.setText(jTxtEstoque.getText().replace(",", "."));
+        if (jTxtPrecoVenda.getText().contains(",")) {
+            jTxtPrecoVenda.setText(jTxtPrecoVenda.getText().replace(",", "."));
         }
 
-        ProdutosTerceiros f = new ProdutosTerceiros();
+        ProdutoTerceiros f = new ProdutoTerceiros();
         f.setNome(jTxtNome.getText());
         f.setPrecoCusto(Float.parseFloat(jTxtPrecoCusto.getText()));
         f.setPrecoVenda(Float.parseFloat(jTxtPrecoVenda.getText()));
         f.setEstoque(Integer.parseInt(jTxtEstoque.getText()));
         f.setEstoqueMin(Integer.parseInt(jTxtEstoqueMin.getText()));
-
+        f.setFornecedor((Fornecedor)jCbxFornecedor.getSelectedItem());
         try {
             PTService.salvar(f);
         } catch (NegocioException ex) {
@@ -225,11 +242,13 @@ public class CadastroProdTercInclui extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnFechar;
     private javax.swing.JButton jBtnSalva;
+    private javax.swing.JComboBox<String> jCbxFornecedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTxtEstoque;
@@ -238,4 +257,14 @@ public class CadastroProdTercInclui extends javax.swing.JDialog {
     private javax.swing.JTextField jTxtPrecoCusto;
     private javax.swing.JTextField jTxtPrecoVenda;
     // End of variables declaration//GEN-END:variables
+
+    private void carregaCombo() {
+        FornecedorService fService = new FornecedorService();
+        
+        Vector<Fornecedor> v = new Vector<>(fService.buscarTodos());
+        
+        DefaultComboBoxModel dcm = new DefaultComboBoxModel(v);
+        
+        jCbxFornecedor.setModel(dcm);
+    }
 }

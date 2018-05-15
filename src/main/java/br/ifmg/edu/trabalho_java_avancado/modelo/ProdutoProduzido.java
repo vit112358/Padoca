@@ -11,8 +11,8 @@ import javax.persistence.ManyToMany;
  * @author Vitor
  */
 @Entity
-@DiscriminatorValue("Produtos_Produzidos")
-public class ProdutosProduzidos extends Produto{
+@DiscriminatorValue("Produto_Produzido")
+public class ProdutoProduzido extends Produto{
     
     private Float precoCusto;
     private Float precoVenda;
@@ -23,10 +23,10 @@ public class ProdutosProduzidos extends Produto{
     @ManyToMany
     private List<Materia_Prima> materiaisUsados;
     
-    public ProdutosProduzidos() {
+    public ProdutoProduzido() {
     }
 
-    public ProdutosProduzidos(Float precoCusto, Float precoVenda, List<Materia_Prima> materiaisUsados, Integer Id, String Nome, Integer estoque, Integer estoqueMin) {
+    public ProdutoProduzido(Float precoCusto, Float precoVenda, List<Materia_Prima> materiaisUsados, Integer Id, String Nome, Integer estoque, Integer estoqueMin) {
         super(Id, Nome);
         this.precoCusto = precoCusto;
         this.precoVenda = precoVenda;
@@ -60,7 +60,7 @@ public class ProdutosProduzidos extends Produto{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ProdutosProduzidos other = (ProdutosProduzidos) obj;
+        final ProdutoProduzido other = (ProdutoProduzido) obj;
         return true;
     }
 

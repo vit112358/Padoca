@@ -1,6 +1,6 @@
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdTerceiros;
 
-import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutosTerceiros;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoTerceiros;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -10,14 +10,14 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ProdTercTableModel extends AbstractTableModel{
     
-    private List<ProdutosTerceiros> prods;
+    private List<ProdutoTerceiros> prods;
     private String[] cols = {"Codigo","Nome", "Preço Custo", "Preço Venda", "Estoque", "Estoque Mín"};
 
-    public ProdTercTableModel(List<ProdutosTerceiros> prods) {
+    public ProdTercTableModel(List<ProdutoTerceiros> prods) {
         this.prods = prods;
     }
 
-    public ProdTercTableModel(List<ProdutosTerceiros> prods, String[] cols) {
+    public ProdTercTableModel(List<ProdutoTerceiros> prods, String[] cols) {
         this.prods = prods;
         this.cols = cols;
     }
@@ -61,7 +61,7 @@ public class ProdTercTableModel extends AbstractTableModel{
         this.fireTableRowsUpdated(rowIndex, rowIndex);
     }
     
-    public void addRow(ProdutosTerceiros a){
+    public void addRow(ProdutoTerceiros a){
         prods.add(a);
         this.fireTableDataChanged();
     }

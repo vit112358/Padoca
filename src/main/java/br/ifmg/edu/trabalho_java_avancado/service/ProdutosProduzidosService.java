@@ -1,7 +1,7 @@
 package br.ifmg.edu.trabalho_java_avancado.service;
 
 import br.ifmg.edu.trabalho_java_avancado.dao.ProdutosProduzidosDAO;
-import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutosProduzidos;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
 import java.io.Serializable;
 import java.util.List;
@@ -14,7 +14,7 @@ public class ProdutosProduzidosService implements Serializable{
     
     ProdutosProduzidosDAO fabDAO = new ProdutosProduzidosDAO();
     
-    public void salvar(ProdutosProduzidos v) throws NegocioException{
+    public void salvar(ProdutoProduzido v) throws NegocioException{
         if(v.getNome() == null || v.getPrecoVenda() == null || v.getMateriaisUsados() == null){
             throw new NegocioException("Verifique o Produto! Ele pode não possuir "
                     + "um Nome, Materiais Usados ou um Preço.");
@@ -23,15 +23,15 @@ public class ProdutosProduzidosService implements Serializable{
         fabDAO.salvar(v);
     }
     
-    public void remover(ProdutosProduzidos f){
+    public void remover(ProdutoProduzido f){
         fabDAO.remover(f);
     }
     
-    public ProdutosProduzidos buscarPorCodigo(Integer codigo){
+    public ProdutoProduzido buscarPorCodigo(Integer codigo){
         return fabDAO.buscarPorCodigo(codigo);
     }
     
-    public List<ProdutosProduzidos> buscarTodos(){
+    public List<ProdutoProduzido> buscarTodos(){
         return fabDAO.buscarTodos();
     }
 }

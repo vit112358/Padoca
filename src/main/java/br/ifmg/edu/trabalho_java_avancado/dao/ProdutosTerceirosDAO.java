@@ -1,6 +1,6 @@
 package br.ifmg.edu.trabalho_java_avancado.dao;
 
-import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutosTerceiros;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoTerceiros;
 import br.ifmg.edu.trabalho_java_avancado.util.FabricaEntity;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -13,24 +13,24 @@ public class ProdutosTerceirosDAO {
     
     EntityManager em = FabricaEntity.getEntityManager();
     
-    public void salvar(ProdutosTerceiros p){
+    public void salvar(ProdutoTerceiros p){
         em.getTransaction().begin();
         em.merge(p);
         em.getTransaction().commit();
     }
     
-    public void remover(ProdutosTerceiros p){
-        ProdutosTerceiros aux = em.find(ProdutosTerceiros.class,p.getID());
+    public void remover(ProdutoTerceiros p){
+        ProdutoTerceiros aux = em.find(ProdutoTerceiros.class,p.getID());
         em.getTransaction().begin();
         em.remove(aux);
         em.getTransaction().commit();        
     }
     
-    public ProdutosTerceiros buscarPorCodigo(Integer codigo){
-        return em.find(ProdutosTerceiros.class, codigo);
+    public ProdutoTerceiros buscarPorCodigo(Integer codigo){
+        return em.find(ProdutoTerceiros.class, codigo);
     }
     
-    public List<ProdutosTerceiros> buscarTodos(){
+    public List<ProdutoTerceiros> buscarTodos(){
         return em.createQuery("from ProdutosTerceiros p").getResultList();
     }
     

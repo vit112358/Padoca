@@ -1,6 +1,6 @@
 package br.ifmg.edu.trabalho_java_avancado.dao;
 
-import br.ifmg.edu.trabalho_java_avancado.modelo.Venda;
+import br.ifmg.edu.trabalho_java_avancado.modelo.Producao;
 import br.ifmg.edu.trabalho_java_avancado.util.FabricaEntity;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -9,28 +9,28 @@ import javax.persistence.EntityManager;
  *
  * @author Vitor
  */
-public class VendaDAO {
+public class ProducaoDAO {
     
     EntityManager em = FabricaEntity.getEntityManager();
     
-    public void salvar(Venda v){
+    public void salvar(Producao a){
         em.getTransaction().begin();
-        em.merge(v);
+        em.merge(a);
         em.getTransaction().commit();
     }
     
-    public void remover(Venda v){
-        Venda aux = em.find(Venda.class,v.getID());
+    public void remover(Producao a){
+        Producao aux = em.find(Producao.class,a.getId());
         em.getTransaction().begin();
         em.remove(aux);
         em.getTransaction().commit();        
     }
     
-    public Venda buscarPorCodigo(Integer codigo){
-        return em.find(Venda.class, codigo);
+    public Producao buscarPorCodigo(Integer codigo){
+        return em.find(Producao.class, codigo);
     }
     
-    public List<Venda> buscarTodos(){
-        return em.createQuery("from Venda v").getResultList();
-    }    
+    public List<Producao> buscarTodos(){
+        return em.createQuery("from Producao a").getResultList();
+    }
 }

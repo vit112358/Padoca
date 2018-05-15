@@ -37,8 +37,8 @@ public class Fornecedor implements Serializable{
     @OneToMany(mappedBy = "fornecedor", fetch = FetchType.LAZY)
     private List<Materia_Prima> materias;
     
-    //@OneToMany(mappedBy = "fornecedor_prod", fetch = FetchType.LAZY)
-    //private List<ProdutosTerceiros> produtos;
+    @OneToMany(mappedBy = "fornecedor_prod", fetch = FetchType.LAZY)
+    private List<ProdutoTerceiros> produtos;
 
     public Fornecedor() {
     }

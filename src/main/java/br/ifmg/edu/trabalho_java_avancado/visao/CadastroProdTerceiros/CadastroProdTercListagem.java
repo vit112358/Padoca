@@ -1,6 +1,6 @@
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdTerceiros;
 
-import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutosTerceiros;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoTerceiros;
 import br.ifmg.edu.trabalho_java_avancado.service.ProdutosTerceirosService;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,7 +16,7 @@ public class CadastroProdTercListagem extends javax.swing.JDialog {
      */
     
     private final ProdutosTerceirosService PTService = new ProdutosTerceirosService();
-    private List<ProdutosTerceiros> prods;
+    private List<ProdutoTerceiros> prods;
     private ProdTercTableModel prodTabModel;
     
     public CadastroProdTercListagem(java.awt.Frame parent, boolean modal) {
@@ -176,7 +176,7 @@ public class CadastroProdTercListagem extends javax.swing.JDialog {
             return;
         }
         
-        ProdutosTerceiros p = prods.get(jTableProdTerc.getSelectedRow());
+        ProdutoTerceiros p = prods.get(jTableProdTerc.getSelectedRow());
         
         CadastroProdTercEdita dialog = new CadastroProdTercEdita(this, true, PTService, p);
         dialog.setVisible(true);
@@ -200,7 +200,7 @@ public class CadastroProdTercListagem extends javax.swing.JDialog {
         if (resp != JOptionPane.YES_OPTION)
            return;
         
-        ProdutosTerceiros p = prods.get(jTableProdTerc.getSelectedRow());
+        ProdutoTerceiros p = prods.get(jTableProdTerc.getSelectedRow());
         PTService.remover(p);
         atualizaDados();
     }//GEN-LAST:event_jBtnRemoverActionPerformed

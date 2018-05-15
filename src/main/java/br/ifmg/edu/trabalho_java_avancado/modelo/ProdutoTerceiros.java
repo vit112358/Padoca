@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @DiscriminatorValue("Produtos_Terceiros")
-public class ProdutosTerceiros extends Produto{
+public class ProdutoTerceiros extends Produto{
     
     private Float precoCusto;
     private Float precoVenda;
@@ -28,14 +28,14 @@ public class ProdutosTerceiros extends Produto{
     
     //Verificar colocar Estoque
     
-    //@ManyToOne
-    //@JoinColumn(name = "Fornecedor_Id")
-    //private Fornecedor fornecedor_prod;
+    @ManyToOne
+    @JoinColumn(name = "Fornecedor_Id")
+    private Fornecedor fornecedor_prod;
 
-    public ProdutosTerceiros() {
+    public ProdutoTerceiros() {
     }
 
-    public ProdutosTerceiros(Float precoCusto, Float precoVenda, Integer Id, String Nome, Integer estoque, Integer estoqueMin) {
+    public ProdutoTerceiros(Float precoCusto, Float precoVenda, Integer Id, String Nome, Integer estoque, Integer estoqueMin) {
         super(Id, Nome);
         this.precoCusto = precoCusto;
         this.precoVenda = precoVenda;
@@ -75,7 +75,7 @@ public class ProdutosTerceiros extends Produto{
         this.EstoqueMin = EstoqueMin;
     }
 
-    /*
+    
     public Fornecedor getFornecedor() {
         return fornecedor_prod;
     }
@@ -83,7 +83,7 @@ public class ProdutosTerceiros extends Produto{
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor_prod = fornecedor;
     }
-    */
+    
        
     @Override
     public String toString() {

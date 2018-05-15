@@ -14,7 +14,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name = "TIPO",
                      discriminatorType = DiscriminatorType.STRING)
 public abstract class Produto implements Serializable {

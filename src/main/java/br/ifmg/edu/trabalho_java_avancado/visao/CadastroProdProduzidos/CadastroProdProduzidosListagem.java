@@ -1,6 +1,6 @@
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos;
 
-import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutosProduzidos;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdTerceiros.*;
 import br.ifmg.edu.trabalho_java_avancado.service.ProdutosProduzidosService;
 import java.util.List;
@@ -17,7 +17,7 @@ public class CadastroProdProduzidosListagem extends javax.swing.JDialog {
      */
     
     private final ProdutosProduzidosService PTService = new ProdutosProduzidosService();
-    private List<ProdutosProduzidos> prods;
+    private List<ProdutoProduzido> prods;
     private ProdProduzidosTableModel prodTabModel;
     
     public CadastroProdProduzidosListagem(java.awt.Frame parent, boolean modal) {
@@ -177,7 +177,7 @@ public class CadastroProdProduzidosListagem extends javax.swing.JDialog {
             return;
         }
         
-        ProdutosProduzidos p = prods.get(jTableProdTerc.getSelectedRow());
+        ProdutoProduzido p = prods.get(jTableProdTerc.getSelectedRow());
         
         //CadastroProdTercEdita dialog = new CadastroProdTercEdita(this, true, PTService, p);
         //dialog.setVisible(true);
@@ -201,7 +201,7 @@ public class CadastroProdProduzidosListagem extends javax.swing.JDialog {
         if (resp != JOptionPane.YES_OPTION)
            return;
         
-        ProdutosProduzidos p = prods.get(jTableProdTerc.getSelectedRow());
+        ProdutoProduzido p = prods.get(jTableProdTerc.getSelectedRow());
         PTService.remover(p);
         atualizaDados();
     }//GEN-LAST:event_jBtnRemoverActionPerformed
