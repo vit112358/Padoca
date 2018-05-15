@@ -12,6 +12,7 @@ import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdTerceiros.CadastroPr
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroVendedores.CadastroVendedorListagem;
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroFornecedor.CadastroFornecedorListagem;
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.CadastroProdProduzidosListagem;
+import br.ifmg.edu.trabalho_java_avancado.visao.Vendas.CadastroVendasListagem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -156,6 +157,11 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
 
         jSubMenuVenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jSubMenuVenda.setText("Vendas");
+        jSubMenuVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSubMenuVendaActionPerformed(evt);
+            }
+        });
         jMenuVendas.add(jSubMenuVenda);
 
         jMenuAdm.add(jMenuVendas);
@@ -229,6 +235,12 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         CadastroProdProduzidosListagem dialog = new CadastroProdProduzidosListagem(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_jSubMenuProdProduzidoActionPerformed
+
+    private void jSubMenuVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubMenuVendaActionPerformed
+        // TODO add your handling code here:
+        CadastroVendasListagem dialog = new CadastroVendasListagem(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jSubMenuVendaActionPerformed
 
     /**
      * @param args the command line arguments
