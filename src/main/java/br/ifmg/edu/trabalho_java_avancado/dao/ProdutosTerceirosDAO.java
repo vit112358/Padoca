@@ -31,7 +31,7 @@ public class ProdutosTerceirosDAO {
     }
     
     public List<ProdutoTerceiros> buscarTodos(){
-        return em.createQuery("from ProdutosTerceiros p").getResultList();
+        return em.createQuery("from ProdutoTerceiros p").getResultList();
     }
     
 }

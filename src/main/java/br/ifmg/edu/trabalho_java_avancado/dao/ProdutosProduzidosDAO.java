@@ -31,6 +31,6 @@ public class ProdutosProduzidosDAO {
     }
     
     public List<ProdutoProduzido> buscarTodos(){
-        return em.createQuery("from ProdutosProduzidos p").getResultList();
+        return em.createQuery("from ProdutoProduzido p").getResultList();
     } 
 }

@@ -30,6 +30,9 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
 
         this.PTService = pService;
         materiais_usados= new LinkedList<>();
+        jTxtEstoque.setText("0");
+        jTxtEstoque.setEditable(false);
+        jTxtEstoqueMin.setText("0");
         carregaTabela();
     }
 
@@ -312,8 +315,8 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
             jTxtPrecoCusto.setText(jTxtPrecoCusto.getText().replace(",", "."));
         }
 
-        if (jTxtEstoque.getText().contains(",")) {
-            jTxtEstoque.setText(jTxtEstoque.getText().replace(",", "."));
+        if (jTxtPrecoVenda.getText().contains(",")) {
+            jTxtPrecoVenda.setText(jTxtPrecoVenda.getText().replace(",", "."));
         }
 
         ProdutoProduzido f = new ProdutoProduzido();
