@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /**
@@ -21,6 +23,9 @@ public class ProdutoProduzido extends Produto{
     private Integer EstoqueMin;
     
     @ManyToMany
+    @JoinTable(name = "Produto_materia",
+            joinColumns = @JoinColumn(name = "Cod_Produto"),
+            inverseJoinColumns = @JoinColumn(name = "codigo_materia"))
     private List<Materia_Prima> materiaisUsados;
     
     public ProdutoProduzido() {

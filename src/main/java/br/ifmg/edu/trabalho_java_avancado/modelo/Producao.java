@@ -31,7 +31,7 @@ public class Producao implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date DataProducao;
     
-    @OneToMany(mappedBy = "item",
+    @OneToMany(mappedBy = "producao",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<ItemProducao> itens = new LinkedList<ItemProducao>();
