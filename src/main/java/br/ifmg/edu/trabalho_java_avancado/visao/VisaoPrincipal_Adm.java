@@ -62,6 +62,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jSubMenuMateria = new javax.swing.JMenuItem();
         jSubMenuProdTerc = new javax.swing.JMenuItem();
         jSubMenuProdProduzido = new javax.swing.JMenuItem();
+        jMenuProducao = new javax.swing.JMenu();
         jMenuVendas = new javax.swing.JMenu();
         jSubMenuVenda = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
@@ -152,6 +153,9 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jMenuCadastro.add(jSubMenuProdProduzido);
 
         jMenuAdm.add(jMenuCadastro);
+
+        jMenuProducao.setText("Produção");
+        jMenuAdm.add(jMenuProducao);
 
         jMenuVendas.setText("Vendas");
 
@@ -281,6 +285,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuAdm;
     private javax.swing.JMenu jMenuCadastro;
+    private javax.swing.JMenu jMenuProducao;
     private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenu jMenuVendas;
     private javax.swing.JPanel jPanel1;

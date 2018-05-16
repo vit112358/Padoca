@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.ifmg.edu.trabalho_java_avancado.visao.CadastroVendedores;
+package br.ifmg.edu.trabalho_java_avancado.visao.Producao;
 
-import br.ifmg.edu.trabalho_java_avancado.modelo.Vendedor;
-import br.ifmg.edu.trabalho_java_avancado.service.VendedorService;
+import br.ifmg.edu.trabalho_java_avancado.modelo.Producao;
+import br.ifmg.edu.trabalho_java_avancado.service.ProducaoService;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -15,17 +10,17 @@ import javax.swing.JOptionPane;
  *
  * @author Vitor
  */
-public class CadastroVendedorListagem extends javax.swing.JDialog {
+public class CadastroProducaoListagem extends javax.swing.JDialog {
 
     /**
      * Creates new form CadastroVendedorListagem
      */
     
-    private final VendedorService vService = new VendedorService();
-    private List<Vendedor> vendedores;
-    private CadastroVendedorTableModel vTabModel;
+    private final ProducaoService pService = new ProducaoService();
+    private List<Producao> producao;
+    private ProducaoTableModel pTabModel;
     
-    public CadastroVendedorListagem(java.awt.Frame parent, boolean modal) {
+    public CadastroProducaoListagem(java.awt.Frame parent, boolean modal) {
         super(parent,modal);
         initComponents();
         
@@ -82,10 +77,10 @@ public class CadastroVendedorListagem extends javax.swing.JDialog {
         jTBBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro - Vendedores"));
         jTBBotoes.setRollover(true);
 
-        jBtnIncluir.setText("Incluir");
+        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jBtnIncluir.setText("Produção");
         jBtnIncluir.setFocusable(false);
-        jBtnIncluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBtnIncluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnIncluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnIncluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jBtnIncluirMouseEntered(evt);
@@ -98,9 +93,10 @@ public class CadastroVendedorListagem extends javax.swing.JDialog {
         });
         jTBBotoes.add(jBtnIncluir);
 
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pencil-edit-button (1).png"))); // NOI18N
         jBtnEditar.setText("Editar");
         jBtnEditar.setFocusable(false);
-        jBtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,9 +105,10 @@ public class CadastroVendedorListagem extends javax.swing.JDialog {
         });
         jTBBotoes.add(jBtnEditar);
 
+        jBtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/remove (2).png"))); // NOI18N
         jBtnRemover.setText("Remover");
         jBtnRemover.setFocusable(false);
-        jBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnRemover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jBtnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,9 +165,9 @@ public class CadastroVendedorListagem extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        CadastroVendedorInclui dialog = new CadastroVendedorInclui(this, true, vService);
-        dialog.setVisible(true);
-        atualizaDados();
+        //CadastroVendedorInclui dialog = new CadastroVendedorInclui(this, true, vService);
+        //dialog.setVisible(true);
+        //atualizaDados();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
@@ -181,10 +178,10 @@ public class CadastroVendedorListagem extends javax.swing.JDialog {
             return;
         }
         
-        Vendedor v = vendedores.get(jTableFunc.getSelectedRow());
+        Producao p = producao.get(jTableFunc.getSelectedRow());
         
-        CadastroVendedorEdita dialog = new CadastroVendedorEdita(this, true, vService, v);
-        dialog.setVisible(true);
+        //CadastroVendedorEdita dialog = new CadastroVendedorEdita(this, true, vService, v);
+        //dialog.setVisible(true);
         atualizaDados();
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
@@ -205,8 +202,8 @@ public class CadastroVendedorListagem extends javax.swing.JDialog {
         if (resp != JOptionPane.YES_OPTION)
            return;
         
-        Vendedor v = vendedores.get(jTableFunc.getSelectedRow());
-        vService.remover(v);
+        Producao p = producao.get(jTableFunc.getSelectedRow());
+        pService.remover(p);
         atualizaDados();
     }//GEN-LAST:event_jBtnRemoverActionPerformed
 
@@ -223,21 +220,23 @@ public class CadastroVendedorListagem extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendedorListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroProducaoListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendedorListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroProducaoListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendedorListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroProducaoListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendedorListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroProducaoListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CadastroVendedorListagem dialog = new CadastroVendedorListagem(new javax.swing.JFrame(), true);
+                CadastroProducaoListagem dialog = new CadastroProducaoListagem(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -262,10 +261,11 @@ public class CadastroVendedorListagem extends javax.swing.JDialog {
 
     private void atualizaDados() {
         //1-buscando os dados do BD
-       vendedores = vService.buscarTodos();
+       producao = pService.buscarTodos();
+       List<Integer> num_i = pService.buscarNum_itens();
         //2-configurando o modelo com os dados do bd
-       vTabModel = new CadastroVendedorTableModel(vendedores);
+       pTabModel = new ProducaoTableModel(producao, num_i);
        //3-configurando o Jtable com o modelo criado
-       jTableFunc.setModel(vTabModel);
+       jTableFunc.setModel(pTabModel);
     }
 }

@@ -33,4 +33,13 @@ public class ProducaoDAO {
     public List<Producao> buscarTodos(){
         return em.createQuery("from Producao a").getResultList();
     }
+    
+    public List<Integer> buscaNumItens(){
+        String sql = "Select Count(i) from Producao p "
+                + "join p.itens i";
+        
+        List<Integer> resultado = em.createQuery(sql).getResultList();
+        
+        return resultado;
+    }
 }

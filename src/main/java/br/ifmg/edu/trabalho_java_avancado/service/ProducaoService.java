@@ -34,4 +34,7 @@ public class ProducaoService {
         return fabDAO.buscarTodos();
     }
 
+    public List<Integer> buscarNum_itens() {
+        return fabDAO.buscaNumItens();
+    }
 }

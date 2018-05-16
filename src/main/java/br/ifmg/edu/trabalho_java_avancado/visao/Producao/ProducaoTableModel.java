@@ -12,15 +12,15 @@ import javax.swing.table.AbstractTableModel;
 public class ProducaoTableModel extends AbstractTableModel{
     
     private List<Producao> producao;
-    private Integer num_itens;
+    private List<Integer> num_itens;
     private String[] cols ={"Código", "Data_Produção", "n° Itens"};
 
-    public ProducaoTableModel(List<Producao> producao, Integer num_itens) {
+    public ProducaoTableModel(List<Producao> producao, List<Integer> num_itens) {
         this.producao = producao;
         this.num_itens = num_itens;
     }
     
-    public ProducaoTableModel(List<Producao> producao, Integer num_itens, String[] cols) {
+    public ProducaoTableModel(List<Producao> producao, List<Integer> num_itens, String[] cols) {
         this.producao = producao;
         this.num_itens = num_itens;
         this.cols = cols;
@@ -41,7 +41,7 @@ public class ProducaoTableModel extends AbstractTableModel{
         switch (columnIndex){
             case 0 : return producao.get(rowIndex).getId();
             case 1 : return producao.get(rowIndex).getDataProducao();
-            case 2 : return num_itens;     
+            case 2 : return num_itens.get(rowIndex);     
         }
         return null;
     }
@@ -54,7 +54,7 @@ public class ProducaoTableModel extends AbstractTableModel{
         switch (columnIndex){
             case 0 : producao.get(rowIndex).setId((Integer)aValue);break;
             case 1 : producao.get(rowIndex).setDataProducao((Date)aValue);break;
-            case 2 : num_itens = (Integer) aValue;break;                      
+            case 2 : num_itens.add((Integer)aValue);break;                      
         }      
         this.fireTableRowsUpdated(rowIndex, rowIndex);
     }
