@@ -42,7 +42,7 @@ public class CadastroFornecedorListagem extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableFunc = new javax.swing.JTable();
+        jTableForn = new javax.swing.JTable();
         jTBBotoes = new javax.swing.JToolBar();
         jBtnIncluir = new javax.swing.JButton();
         jBtnEditar = new javax.swing.JButton();
@@ -54,7 +54,7 @@ public class CadastroFornecedorListagem extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTableFunc.setModel(new javax.swing.table.DefaultTableModel(
+        jTableForn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -65,7 +65,7 @@ public class CadastroFornecedorListagem extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTableFunc);
+        jScrollPane1.setViewportView(jTableForn);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -174,13 +174,13 @@ public class CadastroFornecedorListagem extends javax.swing.JDialog {
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
         // TODO add your handling code here:
-        if(jTableFunc.getSelectedRow() == -1){
+        if(jTableForn.getSelectedRow() == -1){
             JOptionPane.showMessageDialog(this, 
                     "Por favor, selecione um registro");            
             return;
         }
         
-        Fornecedor f = fornecedores.get(jTableFunc.getSelectedRow());
+        Fornecedor f = fornecedores.get(jTableForn.getSelectedRow());
         
         CadastroFornecedorEdita dialog = new CadastroFornecedorEdita(this, true, fService, f);
         dialog.setVisible(true);
@@ -189,7 +189,7 @@ public class CadastroFornecedorListagem extends javax.swing.JDialog {
 
     private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
         // TODO add your handling code here:
-        if(jTableFunc.getSelectedRow() == -1){
+        if(jTableForn.getSelectedRow() == -1){
             JOptionPane.showMessageDialog(this, 
                     "Por favor, selecione um registro");            
             return;
@@ -204,7 +204,7 @@ public class CadastroFornecedorListagem extends javax.swing.JDialog {
         if (resp != JOptionPane.YES_OPTION)
            return;
         
-        Fornecedor v = fornecedores.get(jTableFunc.getSelectedRow());
+        Fornecedor v = fornecedores.get(jTableForn.getSelectedRow());
         fService.remover(v);
         atualizaDados();
     }//GEN-LAST:event_jBtnRemoverActionPerformed
@@ -258,7 +258,7 @@ public class CadastroFornecedorListagem extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jTBBotoes;
-    private javax.swing.JTable jTableFunc;
+    private javax.swing.JTable jTableForn;
     // End of variables declaration//GEN-END:variables
 
     private void atualizaDados() {
@@ -268,6 +268,6 @@ public class CadastroFornecedorListagem extends javax.swing.JDialog {
         //2-configurando o modelo com os dados do bd
        fTabModel = new FornecedorTableModel(fornecedores);
        //3-configurando o Jtable com o modelo criado
-       jTableFunc.setModel(fTabModel);
+       jTableForn.setModel(fTabModel);
     }
 }

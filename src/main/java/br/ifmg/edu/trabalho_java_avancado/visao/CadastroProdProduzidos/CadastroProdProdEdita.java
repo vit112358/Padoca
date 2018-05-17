@@ -1,6 +1,7 @@
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.Itens;
+import br.ifmg.edu.trabalho_java_avancado.modelo.Materia_Prima;
 import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
 import br.ifmg.edu.trabalho_java_avancado.service.ProdutosProduzidosService;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
@@ -13,27 +14,33 @@ import javax.swing.JOptionPane;
  *
  * @author Vitor
  */
-public class CadastroProdProdInclui extends javax.swing.JDialog {
+public class CadastroProdProdEdita extends javax.swing.JDialog {
 
     /**
      * Creates new form CadastroVendedorInclui
      */
     private ProdutosProduzidosService PTService;
+    private ProdutoProduzido prod;
     private List<Itens> materiais_usados;
     private ItemTableModel iTableModel;
-    private ProdutoProduzido f;
     private Float precoC;
 
-    public CadastroProdProdInclui(JDialog parent, boolean modal, ProdutosProduzidosService pService) {
+    public CadastroProdProdEdita(JDialog parent, boolean modal, ProdutosProduzidosService pService, ProdutoProduzido p) {
         super(parent, modal);
         initComponents();
 
         this.PTService = pService;
-        materiais_usados = new LinkedList<>();
-        f = new ProdutoProduzido();
-        jTxtEstoque.setText("0");
+        this.prod = p;
+        materiais_usados= p.getMateriaisUsados();
+        jTxtNome.setText(p.getNome());
+        jTxtEstoque.setText(String.valueOf(p.getEstoque()));
+        jTxtEstoqueMin.setText(String.valueOf(p.getEstoqueMin()));
         jTxtEstoque.setEditable(false);
-        jTxtEstoqueMin.setText("0");
+        jTxtPrecoCusto.setText(String.valueOf(p.getPrecoCusto()));
+        jTxtPrecoVenda.setText(String.valueOf(p.getPrecoVenda()));
+        
+        
+        
         carregaTabela();
     }
 
@@ -287,10 +294,12 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFecharActionPerformed
+        // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jBtnFecharActionPerformed
 
     private void jBtnSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvaActionPerformed
+        // TODO add your handling code here:
         if (jTxtPrecoCusto.getText() == null || jTxtPrecoCusto.getText().trim().equals("")
                 || jTxtNome.getText() == null || jTxtNome.getText().trim().equals("")
                 || jTxtEstoque.getText() == null || jTxtEstoque.getText().trim().equals("")
@@ -310,23 +319,23 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
             return;
         }
 
-        /*if (jTxtPrecoCusto.getText().contains(",")) {
+        if (jTxtPrecoCusto.getText().contains(",")) {
             jTxtPrecoCusto.setText(jTxtPrecoCusto.getText().replace(",", "."));
-        }*/
+        }
 
         if (jTxtPrecoVenda.getText().contains(",")) {
             jTxtPrecoVenda.setText(jTxtPrecoVenda.getText().replace(",", "."));
         }
 
-        f.setNome(jTxtNome.getText());
-        f.setPrecoCusto(Float.parseFloat(jTxtPrecoCusto.getText()));
-        f.setPrecoVenda(Float.parseFloat(jTxtPrecoVenda.getText()));
-        f.setEstoque(Integer.parseInt(jTxtEstoque.getText()));
-        f.setEstoqueMin(Integer.parseInt(jTxtEstoqueMin.getText()));
-        f.setMateriaisUsados(materiais_usados);
-
+        prod.setNome(jTxtNome.getText());
+        prod.setPrecoCusto(Float.parseFloat(jTxtPrecoCusto.getText()));
+        prod.setPrecoVenda(Float.parseFloat(jTxtPrecoVenda.getText()));
+        prod.setEstoque(Integer.parseInt(jTxtEstoque.getText()));
+        prod.setEstoqueMin(Integer.parseInt(jTxtEstoqueMin.getText()));
+        prod.setMateriaisUsados(materiais_usados);
+        
         try {
-            PTService.salvar(f);
+            PTService.salvar(prod);
         } catch (NegocioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -334,6 +343,7 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnSalvaActionPerformed
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
+        // TODO add your handling code here:
         CadastroIncluiEditaProduto dialog = new CadastroIncluiEditaProduto(this,
                 true, materiais_usados, materiais_usados.get(jTableMateriais.getSelectedRow()));
         dialog.setVisible(true);
@@ -341,35 +351,37 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        CadastroIncluiAddProduto dialog = new CadastroIncluiAddProduto(this, true, materiais_usados, f);
-        dialog.setVisible(true);
+        // TODO add your handling code here:
+        CadastroIncluiAddProduto dialog = new CadastroIncluiAddProduto(this, true, materiais_usados, prod);
+        dialog.setVisible(true);        
         carregaTabela();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
-        if (jTableMateriais.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this,
-                    "Por favor, selecione um registro");
+        // TODO add your handling code here:
+        if(jTableMateriais.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, 
+                    "Por favor, selecione um registro");            
             return;
         }
-
-        int resp = JOptionPane.showConfirmDialog(this,
+        
+        int resp = JOptionPane.showConfirmDialog(this, 
                 "Confirma a exclusão?",
                 "Excluir registro",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
-
-        if (resp != JOptionPane.YES_OPTION) {
-            return;
-        }
-
+        
+        if (resp != JOptionPane.YES_OPTION)
+           return;
+        
         materiais_usados.remove(jTableMateriais.getSelectedRow());
         carregaTabela();
     }//GEN-LAST:event_jBtnRemoverActionPerformed
 
     private void jTxtPrecoVendaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtPrecoVendaFocusGained
-        String conta = String.valueOf(Math.floor(Float.parseFloat(jTxtPrecoCusto.getText()) * 1.3));
-        jTxtPrecoVenda.setToolTipText("Sugerimos um acréscimo de 30%. Preço Final: R$" + conta + ".");
+        // TODO add your handling code here:
+        String conta = String.valueOf(Math.floor(Float.parseFloat(jTxtPrecoCusto.getText())*1.3));
+        jTxtPrecoVenda.setToolTipText("Sugerimos um acréscimo de 30%. Preço Final: R$"+conta+".");
     }//GEN-LAST:event_jTxtPrecoVendaFocusGained
 
     /**
@@ -403,7 +415,7 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
     private void carregaTabela() {
         precoC = new Float(0);
         for (Itens materiais_usado : materiais_usados) {
-            precoC += materiais_usado.getMp().getPreco() * materiais_usado.getQtde();
+            precoC+= materiais_usado.getMp().getPreco()*materiais_usado.getQtde();
         }
         jTxtPrecoCusto.setText(String.valueOf(precoC));
         iTableModel = new ItemTableModel(materiais_usados);

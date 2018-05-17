@@ -1,29 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ifmg.edu.trabalho_java_avancado.modelo;
 
-import java.util.List;
+import com.sun.istack.internal.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Vitor
  */
-public class Itens {
+
+@Entity
+public class Itens implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;
-    private Materia_Prima materiais;
-    private Float Qtde;
+    
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "codProduto")
+    private ProdutoProduzido produto;
+    
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "codMateria")
+    private Materia_Prima mp;
+    
+    @Column(nullable = false)
+    private Integer qtde;
 
     public Itens() {
-    }
-
-    public Itens(Integer ID, Materia_Prima materiais, Float Qtde) {
-        this.ID = ID;
-        this.materiais = materiais;
-        this.Qtde = Qtde;
     }
 
     public Integer getID() {
@@ -34,26 +47,34 @@ public class Itens {
         this.ID = ID;
     }
 
-    public Materia_Prima getMateriais() {
-        return materiais;
+    public ProdutoProduzido getProduto() {
+        return produto;
     }
 
-    public void setMateriais(Materia_Prima materiais) {
-        this.materiais = materiais;
+    public void setProduto(ProdutoProduzido produto) {
+        this.produto = produto;
     }
 
-    public Float getQtde() {
-        return Qtde;
+    public Materia_Prima getMp() {
+        return mp;
     }
 
-    public void setQtde(Float Qtde) {
-        this.Qtde = Qtde;
+    public void setMp(Materia_Prima mp) {
+        this.mp = mp;
+    }
+
+    public Integer getQtde() {
+        return qtde;
+    }
+
+    public void setQtde(Integer qtde) {
+        this.qtde = qtde;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.ID);
+        hash = 97 * hash + Objects.hashCode(this.ID);
         return hash;
     }
 
@@ -73,6 +94,11 @@ public class Itens {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Itens{" + "ID=" + ID + ", produto=" + produto + ", mp=" + mp + ", qtde=" + qtde + '}';
     }
 
 }

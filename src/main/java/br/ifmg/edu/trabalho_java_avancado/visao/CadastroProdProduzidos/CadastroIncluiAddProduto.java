@@ -2,6 +2,7 @@ package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.Itens;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Materia_Prima;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
 import br.ifmg.edu.trabalho_java_avancado.service.Materia_PrimaService;
 import java.util.List;
 import java.util.Vector;
@@ -9,13 +10,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Vitor
- */
 public class CadastroIncluiAddProduto extends javax.swing.JDialog {
 
     private List<Itens> materiais;
+    private ProdutoProduzido p;
 
     /**
      * Creates new form CadastroIncluiAddProduto
@@ -23,11 +21,12 @@ public class CadastroIncluiAddProduto extends javax.swing.JDialog {
      * @param modal
      * @param itens
      */
-    public CadastroIncluiAddProduto(JDialog parent, boolean modal, List<Itens> itens) {
+    public CadastroIncluiAddProduto(JDialog parent, boolean modal, List<Itens> itens, ProdutoProduzido p) {
         super(parent, modal);
         initComponents();
 
         this.materiais = itens;
+        this.p = p;
 
         carregaCombos();
     }
@@ -172,8 +171,9 @@ public class CadastroIncluiAddProduto extends javax.swing.JDialog {
 
             aux1 = (Materia_Prima) jcbxMateria.getSelectedItem();
             aux.setID(aux1.getID());
-            aux.setMateriais(aux1);
-            aux.setQtde(Float.parseFloat(jTxtQtde.getText()));
+            aux.setMp(aux1);
+            aux.setQtde(Integer.parseInt(jTxtQtde.getText()));
+            aux.setProduto(p);
 
             materiais.add(aux);
         }else{

@@ -1,12 +1,12 @@
 package br.ifmg.edu.trabalho_java_avancado.modelo;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,16 +22,15 @@ public class ProdutoProduzido extends Produto{
     private Integer Estoque;
     private Integer EstoqueMin;
     
-    @ManyToMany
-    @JoinTable(name = "Produto_materia",
-            joinColumns = @JoinColumn(name = "Cod_Produto"),
-            inverseJoinColumns = @JoinColumn(name = "codigo_materia"))
-    private List<Materia_Prima> materiaisUsados;
+    @OneToMany(mappedBy = "produto",
+               cascade = CascadeType.ALL,
+               orphanRemoval = true)
+    private List<Itens> materiaisUsados = new LinkedList<Itens>();
     
     public ProdutoProduzido() {
     }
 
-    public ProdutoProduzido(Float precoCusto, Float precoVenda, List<Materia_Prima> materiaisUsados, Integer Id, String Nome, Integer estoque, Integer estoqueMin) {
+    public ProdutoProduzido(Float precoCusto, Float precoVenda, List<Itens> materiaisUsados, Integer Id, String Nome, Integer estoque, Integer estoqueMin) {
         super(Id, Nome);
         this.precoCusto = precoCusto;
         this.precoVenda = precoVenda;
@@ -85,11 +84,11 @@ public class ProdutoProduzido extends Produto{
         this.precoVenda = precoVenda;
     }
 
-    public List<Materia_Prima> getMateriaisUsados() {
+    public List<Itens> getMateriaisUsados() {
         return materiaisUsados;
     }
 
-    public void setMateriaisUsados(List<Materia_Prima> materiaisUsados) {
+    public void setMateriaisUsados(List<Itens> materiaisUsados) {
         this.materiaisUsados = materiaisUsados;
     }
 

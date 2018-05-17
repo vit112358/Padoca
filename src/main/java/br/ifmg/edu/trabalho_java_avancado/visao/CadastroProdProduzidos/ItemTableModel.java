@@ -39,7 +39,7 @@ public class ItemTableModel extends AbstractTableModel {
             case 0:
                 return materiais.get(rowIndex).getID();
             case 1:
-                return materiais.get(rowIndex).getMateriais();
+                return materiais.get(rowIndex).getMp();
             case 2:
                 return materiais.get(rowIndex).getQtde();
         }
@@ -57,10 +57,10 @@ public class ItemTableModel extends AbstractTableModel {
                 materiais.get(rowIndex).setID((Integer) aValue);
                 break;
             case 1:
-                materiais.get(rowIndex).setMateriais((Materia_Prima) aValue);
+                materiais.get(rowIndex).setMp((Materia_Prima) aValue);
                 break;
             case 2:
-                materiais.get(rowIndex).setQtde((Float) aValue);
+                materiais.get(rowIndex).setQtde((Integer) aValue);
                 break;
         }
         this.fireTableRowsUpdated(rowIndex, rowIndex);

@@ -32,7 +32,7 @@ public class CadastroIncluiEditaProduto extends javax.swing.JDialog {
         this.item = i;
 
         carregaCombos();
-        jcbxMateria.setSelectedItem(item.getMateriais());
+        jcbxMateria.setSelectedItem(item.getMp());
         jTxtQtde.setText(String.valueOf(item.getQtde()));
     }
 
@@ -175,8 +175,8 @@ public class CadastroIncluiEditaProduto extends javax.swing.JDialog {
 
             aux1 = (Materia_Prima) jcbxMateria.getSelectedItem();
             item.setID(aux1.getID());
-            item.setMateriais(aux1);
-            item.setQtde(Float.parseFloat(jTxtQtde.getText()));
+            item.setMp(aux1);
+            item.setQtde(Integer.parseInt(jTxtQtde.getText()));
 
             JOptionPane.showMessageDialog(this, "Edição feita com sucesso!");
         }else{

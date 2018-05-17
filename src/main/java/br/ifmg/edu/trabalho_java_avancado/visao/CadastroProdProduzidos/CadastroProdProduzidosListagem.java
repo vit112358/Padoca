@@ -1,7 +1,6 @@
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
-import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdTerceiros.*;
 import br.ifmg.edu.trabalho_java_avancado.service.ProdutosProduzidosService;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -11,10 +10,6 @@ import javax.swing.JOptionPane;
  * @author Vitor
  */
 public class CadastroProdProduzidosListagem extends javax.swing.JDialog {
-
-    /**
-     * Creates new form CadastroVendedorListagem
-     */
     
     private final ProdutosProduzidosService PTService = new ProdutosProduzidosService();
     private List<ProdutoProduzido> prods;
@@ -179,9 +174,9 @@ public class CadastroProdProduzidosListagem extends javax.swing.JDialog {
         
         ProdutoProduzido p = prods.get(jTableProdTerc.getSelectedRow());
         
-        //CadastroProdTercEdita dialog = new CadastroProdTercEdita(this, true, PTService, p);
-        //dialog.setVisible(true);
-        //atualizaDados();
+        CadastroProdProdEdita dialog = new CadastroProdProdEdita(this, true, PTService, p);
+        dialog.setVisible(true);
+        atualizaDados();
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
